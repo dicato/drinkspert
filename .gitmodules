@@ -1,0 +1,3 @@
+[submodule "drinkspert/static/bootstrap"]
+	path = drinkspert/static/bootstrap
+	url = https://github.com/twitter/bootstrap.git
