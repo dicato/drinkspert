@@ -29,33 +29,16 @@ class Drink(models.Model):
         # This makes 'Drink' an abstract base class
         abstract = True
     
-class Beer(Drink):
-    """
-    A beer.
-    """
-    brewery = models.ForeignKey("Brewery")
-    style = models.CharField(max_length=256)
-
-    # TODO:
-    # Image Field for beer bottle / logo
-
     def __unicode__(self):
         return self.name
 
 
-class Gin(Drink):
+class Place(models.Model):
     """
-    Hmm, juniper.
-    """
-    distiller = models.CharField(max_length=512)
+    Common base class for all place types.
 
-    def __unicode__(self):
-        return self.name
-
-
-class Brewery(models.Model):
-    """
-    Creator of beers.
+    Subclass for Bar, Brewery, Distillery, etc.
+    
     """
     # TODO:
     # Maybe this should be a generic 'owner'
@@ -68,21 +51,39 @@ class Brewery(models.Model):
     latitude = models.FloatField(blank=True, null=True)
     longitude = models.FloatField(blank=True, null=True)
 
+    class Meta:
+        # This makes 'Place' an abstract base class
+        abstract = True
+
     def __unicode__(self):
         return self.name
 
 
-class Bar(models.Model):
+class Beer(Drink):
+    """
+    A beer.
+    """
+    brewery = models.ForeignKey("Brewery")
+    style = models.CharField(max_length=256)
+
+    # TODO:
+    # Image Field for beer bottle / logo
+
+
+class Gin(Drink):
+    """
+    Hmm, juniper.
+    """
+    distiller = models.CharField(max_length=512)
+
+
+class Brewery(Place):
+    """
+    Creator of beers.
+    """
+
+
+class Bar(Place):
     """
     Where you had a drink. 
     """
-    name = models.CharField(max_length=512)
-
-    # TODO:
-    # Determine best way to model an address
-    address = models.CharField(max_length=512)
-    latitude = models.FloatField(blank=True, null=True)
-    longitude = models.FloatField(blank=True, null=True)
-
-    def __unicode__(self):
-        return self.name
