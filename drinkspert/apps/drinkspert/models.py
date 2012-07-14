@@ -21,14 +21,14 @@ class Drink(models.Model):
     Common base class for all drink types.
 
     Subclass for Beer, Gin, Vodka, etc.
-    
+
     """
     name = models.CharField(max_length=512)
-    
+
     class Meta:
         # This makes 'Drink' an abstract base class
         abstract = True
-    
+
     def __unicode__(self):
         return self.name
 
@@ -38,7 +38,7 @@ class Place(models.Model):
     Common base class for all place types.
 
     Subclass for Bar, Brewery, Distillery, etc.
-    
+
     """
     # TODO:
     # Maybe this should be a generic 'owner'
@@ -74,16 +74,26 @@ class Gin(Drink):
     """
     Hmm, juniper.
     """
-    distiller = models.CharField(max_length=512)
+    distillery = models.ForeignKey("Distillery")
 
 
 class Brewery(Place):
     """
     Creator of beers.
     """
+    class Meta:
+        verbose_name_plural = "Breweries"
+
+
+class Distillery(Place):
+    """
+    Creator of liquors.
+    """
+    class Meta:
+        verbose_name_plural = "Distilleries"
 
 
 class Bar(Place):
     """
-    Where you had a drink. 
+    Where you had a drink.
     """
