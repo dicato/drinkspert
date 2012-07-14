@@ -1,0 +1,34 @@
+<link rel="stylesheet" href="/static/bootstrap/docs/assets/css/bootstrap.css">
+<link href="/static/bootstrap/docs/assets/css/bootstrap-responsive.css" rel="stylesheet">
+<link href="/static/bootstrap/docs/assets/css/docs.css" rel="stylesheet">
+<CENTER>
+  <h1>Beers</h1>
+</CENTER>
+<div class="container">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+	<th>Name</th>
+	<th>Brewery</th>
+	<th>Style</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% if beers %}
+      {% for b in beers %}
+      <tr>
+	<td><a href="/beers/{{ b.id }}/">{{ b.name }}</a></td>
+	<td>{{ b.brewery }}</td>
+	<td>{{ b.style  }}%</td>
+      </tr>
+      {% endfor %}
+      {% else %}
+      <tr>
+	<td></td>
+	<td></td>
+	<td></td>
+      </tr>
+      {% endif %}
+    </tbody>
+  </table>
+</div>
