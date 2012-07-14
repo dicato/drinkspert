@@ -16,11 +16,23 @@ class Person(models.Model):
         return '%s %s' % (self.first_name, self.last_name)
 
 
-class Beer(models.Model):
+class Drink(models.Model):
     """
-    Django model representing a beer.
+    Common base class for all drink types.
+
+    Subclass for Beer, Gin, Vodka, etc.
+    
     """
     name = models.CharField(max_length=512)
+    
+    class Meta:
+        # This makes 'Drink' an abstract base class
+        abstract = True
+    
+class Beer(Drink):
+    """
+    A beer.
+    """
     brewery = models.ForeignKey("Brewery")
     style = models.CharField(max_length=256)
 
@@ -31,14 +43,10 @@ class Beer(models.Model):
         return self.name
 
 
-class Spirit(models.Model):
+class Gin(Drink):
     """
-    Base class for booze types (I.E., gin, rum).
-
-    Specific spirit types should subclass this.
-    
+    Hmm, juniper.
     """
-    name = models.CharField(max_length=512)
     distiller = models.CharField(max_length=512)
 
     def __unicode__(self):

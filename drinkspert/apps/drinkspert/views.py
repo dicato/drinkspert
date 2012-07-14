@@ -7,5 +7,5 @@ from django.template import Context, loader
 from django.shortcuts import render_to_response
 
 # local imports
-from apps.drinkspert.models import Person, Beer, Spirit
+from apps.drinkspert.models import Person, Beer, Gin
 
